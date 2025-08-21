@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--Revision 1.4-->
+<Main Palette="False" SaveOptions="Gzip" Offset="0 0 1536 864">
+  <Zone Name="TileTest">
+    <W TN="castle_main1" N="WorldObject" PX="0" PY="0" S="1" R="0" L="1" OT="WorldObject" CT="All" ZL="10" F="0" M="False" D="" />
+    <W TN="castle_main7" N="WorldObject" PX="0" PY="48" S="1" R="0" L="1" OT="WorldObject" CT="All" ZL="10" F="0" M="False" D="" />
+    <W TN="castle_main13" N="WorldObject" PX="0" PY="96" S="1" R="0" L="1" OT="WorldObject" CT="All" ZL="10" F="0" M="False" D="" />
+    <W TN="castle_main2" N="WorldObject" PX="48" PY="0" S="1" R="0" L="1" OT="WorldObject" CT="All" ZL="10" F="0" M="False" D="" />
+    <W TN="castle_main8" N="WorldObject" PX="48" PY="48" S="1" R="0" L="1" OT="WorldObject" CT="All" ZL="10" F="0" M="False" D="" />
+    <W TN="castle_main14" N="WorldObject" PX="48" PY="96" S="1" R="0" L="1" OT="WorldObject" CT="All" ZL="10" F="0" M="False" D="" />
+    <W TN="castle_main3" N="WorldObject" PX="96" PY="0" S="1" R="0" L="1" OT="WorldObject" CT="All" ZL="10" F="0" M="False" D="" />
+    <W TN="castle_main9" N="WorldObject" PX="96" PY="48" S="1" R="0" L="1" OT="WorldObject" CT="All" ZL="10" F="0" M="False" D="" />
+    <W TN="castle_main15" N="WorldObject" PX="96" PY="96" S="1" R="0" L="1" OT="WorldObject" CT="All" ZL="10" F="0" M="False" D="" />
+    <W TN="castle_main4" N="WorldObject" PX="144" PY="0" S="1" R="0" L="1" OT="WorldObject" CT="All" ZL="10" F="0" M="False" D="" />
+    <W TN="castle_main10" N="WorldObject" PX="144" PY="48" S="1" R="0" L="1" OT="WorldObject" CT="All" ZL="10" F="0" M="False" D="" />
+    <W TN="castle_main16" N="WorldObject" PX="144" PY="96" S="1" R="0" L="1" OT="WorldObject" CT="All" ZL="10" F="0" M="False" D="" />
+    <W TN="castle_main5" N="WorldObject" PX="192" PY="0" S="1" R="0" L="1" OT="WorldObject" CT="All" ZL="10" F="0" M="False" D="" />
+    <W TN="castle_main11" N="WorldObject" PX="192" PY="48" S="1" R="0" L="1" OT="WorldObject" CT="All" ZL="10" F="0" M="False" D="" />
+    <W TN="castle_main17" N="WorldObject" PX="192" PY="96" S="1" R="0" L="1" OT="WorldObject" CT="All" ZL="10" F="0" M="False" D="" />
+    <W TN="castle_main6" N="WorldObject" PX="240" PY="0" S="1" R="0" L="1" OT="WorldObject" CT="All" ZL="10" F="0" M="False" D="" />
+    <W TN="castle_main12" N="WorldObject" PX="240" PY="48" S="1" R="0" L="1" OT="WorldObject" CT="All" ZL="10" F="0" M="False" D="" />
+    <W TN="castle_main18" N="WorldObject" PX="240" PY="96" S="1" R="0" L="1" OT="WorldObject" CT="All" ZL="10" F="0" M="False" D="" />
+  </Zone>
+</Main>

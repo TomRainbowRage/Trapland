@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--Revision 1.4-->
+<Main Palette="False" SaveOptions="Gzip" Offset="0 0 1536 864">
+  <Zone Name="TestTilesObject">
+    <W TN="object_castle1" N="WorldObject" PX="0" PY="0" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle7" N="WorldObject" PX="0" PY="48" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle13" N="WorldObject" PX="0" PY="96" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle19" N="WorldObject" PX="0" PY="144" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle25" N="WorldObject" PX="0" PY="192" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle31" N="WorldObject" PX="0" PY="240" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle37" N="WorldObject" PX="0" PY="288" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle43" N="WorldObject" PX="0" PY="336" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle49" N="WorldObject" PX="0" PY="384" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle2" N="WorldObject" PX="48" PY="0" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle8" N="WorldObject" PX="48" PY="48" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle14" N="WorldObject" PX="48" PY="96" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle20" N="WorldObject" PX="48" PY="144" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle26" N="WorldObject" PX="48" PY="192" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle32" N="WorldObject" PX="48" PY="240" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle38" N="WorldObject" PX="48" PY="288" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle44" N="WorldObject" PX="48" PY="336" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle50" N="WorldObject" PX="48" PY="384" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle3" N="WorldObject" PX="96" PY="0" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle9" N="WorldObject" PX="96" PY="48" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle15" N="WorldObject" PX="96" PY="96" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle21" N="WorldObject" PX="96" PY="144" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle27" N="WorldObject" PX="96" PY="192" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle33" N="WorldObject" PX="96" PY="240" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle39" N="WorldObject" PX="96" PY="288" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle45" N="WorldObject" PX="96" PY="336" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle51" N="WorldObject" PX="96" PY="384" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle22" N="Torch" PX="144" PY="144" S="1" R="0" L="1" OT="Torch" CT="None" ZL="10" F="0" M="False" D="blue" />
+    <W TN="object_castle28" N="Torch" PX="144" PY="192" S="1" R="0" L="1" OT="Torch" CT="None" ZL="10" F="0" M="False" D="big blue" />
+    <W TN="object_castle34" N="WorldObject" PX="144" PY="240" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle40" N="WorldObject" PX="144" PY="288" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle46" N="WorldObject" PX="144" PY="336" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle52" N="WorldObject" PX="144" PY="384" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle23" N="Torch" PX="192" PY="144" S="1" R="0" L="1" OT="Torch" CT="None" ZL="10" F="0" M="False" D="purple" />
+    <W TN="object_castle29" N="Torch" PX="192" PY="192" S="1" R="0" L="1" OT="Torch" CT="None" ZL="10" F="0" M="False" D="big purple" />
+    <W TN="object_castle35" N="WorldObject" PX="192" PY="240" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle47" N="WorldObject" PX="192" PY="336" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+    <W TN="object_castle24" N="Torch" PX="240" PY="144" S="1" R="0" L="1" OT="Torch" CT="None" ZL="10" F="0" M="False" D="gold" />
+    <W TN="object_castle30" N="Torch" PX="240" PY="192" S="1" R="0" L="1" OT="Torch" CT="None" ZL="10" F="0" M="False" D="big gold" />
+    <W TN="object_castle36" N="WorldObject" PX="240" PY="240" S="1" R="0" L="1" OT="WorldObject" CT="None" ZL="10" F="0" M="False" D="" />
+  </Zone>
+</Main>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<tileset Path="Traps_Large_Tileset">
+  <tile Name="Traps_Large1" Rectangle="0 0 144 144" />
+  <tile Name="Traps_Large2" Rectangle="144 0 144 144" />
+  <tile Name="Traps_Large3" Rectangle="0 144 144 144" />
+  <tile Name="Traps_Large4" Rectangle="144 144 144 144" />
+  <tile Name="Traps_Large5" Rectangle="0 288 144 144" />
+  <tile Name="Traps_Large6" Rectangle="144 288 144 144" />
+  <tile Name="Traps_Large7" Rectangle="0 432 144 144" />
+  <tile Name="Traps_Large8" Rectangle="144 432 144 144" />
+  <tile Name="Traps_Large9" Rectangle="0 576 144 144" />
+  <tile Name="Traps_Large10" Rectangle="144 576 144 144" />
+  <tile Name="Traps_Large11" Rectangle="0 720 144 144" />
+  <tile Name="Traps_Large12" Rectangle="144 720 144 144" />
+  <tile Name="Traps_Large13" Rectangle="0 864 144 144" />
+  <tile Name="Traps_Large14" Rectangle="144 864 144 144" />
+  <tile Name="Traps_Large15" Rectangle="0 1008 144 144" />
+  <tile Name="Traps_Large16" Rectangle="144 1008 144 144" />
+  <tile Name="Traps_Large17" Rectangle="0 1152 144 144" />
+  <tile Name="Traps_Large18" Rectangle="144 1152 144 144" />
+</tileset>

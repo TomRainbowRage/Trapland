@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--Revision 1.3-->
+<Main Palette="False" SaveOptions="Gzip" Offset="0 0 1536 864">
+  <Zone Name="0_0">
+    <W TN="Object_World5" N="Object_World5" PX="1200" PY="480" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="c-8" />
+    <W TN="Object_World5" N="Object_World5" PX="816" PY="96" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="c-52" />
+    <W TN="Object_World5" N="Object_World5" PX="816" PY="288" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="c-5" />
+    <W TN="Object_World5" N="Object_World5" PX="624" PY="288" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="c-4" />
+    <W TN="Object_World5" N="Object_World5" PX="48" PY="288" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="c-1" />
+    <W TN="Object_World5" N="Object_World5" PX="240" PY="288" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="c-2" />
+    <W TN="Object_World5" N="Object_World5" PX="432" PY="288" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="c-3" />
+    <W TN="Object_World5" N="Object_World5" PX="1008" PY="288" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="c-6" />
+    <W TN="Object_World5" N="Object_World5" PX="1200" PY="96" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="c-53" />
+    <W TN="Object_World5" N="Object_World5" PX="1008" PY="480" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="c-7" />
+    <W TN="Object_World5" N="Object_World5" PX="1392" PY="288" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="c-10" />
+    <W TN="Object_World5" N="Object_World5" PX="1392" PY="480" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="c-9" />
+  </Zone>
+</Main>

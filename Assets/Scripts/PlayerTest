@@ -1,0 +1,1850 @@
+using System;
+using System.Collections.Generic;
+using Bloody_Trapland.Managers;
+using Bloody_Trapland.Screens;
+using Bloody_Trapland.WorldObjects;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using TwoPlayGame.GameWorld;
+using TwoPlayGame.Graphics;
+using TwoPlayGame.Helpers;
+using TwoPlayGame.Managers;
+
+namespace Bloody_Trapland.GameObjects
+{
+	// Token: 0x02000186 RID: 390
+	public class Player : Character
+	{
+		// Token: 0x17000084 RID: 132
+		// (get) Token: 0x060004B8 RID: 1208 RVA: 0x0001C4C9 File Offset: 0x0001A6C9
+		public int CharacterID
+		{
+			get
+			{
+				return this.m_CharacterID;
+			}
+		}
+
+		// Token: 0x17000085 RID: 133
+		// (get) Token: 0x060004B9 RID: 1209 RVA: 0x0001C4D1 File Offset: 0x0001A6D1
+		// (set) Token: 0x060004BA RID: 1210 RVA: 0x0001C4D9 File Offset: 0x0001A6D9
+		public PlayerIndex PlayerIndex
+		{
+			get
+			{
+				return this.m_PlayerIndex;
+			}
+			set
+			{
+				this.m_PlayerIndex = value;
+			}
+		}
+
+		// Token: 0x17000086 RID: 134
+		// (get) Token: 0x060004BB RID: 1211 RVA: 0x0001C4E2 File Offset: 0x0001A6E2
+		public float PlyayerRuntime
+		{
+			get
+			{
+				return this.m_FinishTimer;
+			}
+		}
+
+		// Token: 0x17000087 RID: 135
+		// (get) Token: 0x060004BC RID: 1212 RVA: 0x0001C4EA File Offset: 0x0001A6EA
+		// (set) Token: 0x060004BD RID: 1213 RVA: 0x0001C4F2 File Offset: 0x0001A6F2
+		public float MoveSpeed
+		{
+			get
+			{
+				return this.moveSpeed;
+			}
+			set
+			{
+				this.moveSpeed = value;
+			}
+		}
+
+		// Token: 0x17000088 RID: 136
+		// (get) Token: 0x060004BE RID: 1214 RVA: 0x0001C4FB File Offset: 0x0001A6FB
+		// (set) Token: 0x060004BF RID: 1215 RVA: 0x0001C503 File Offset: 0x0001A703
+		public bool FirstTimeSpawned
+		{
+			get
+			{
+				return this.m_FirstTimeSpawned;
+			}
+			set
+			{
+				this.m_FirstTimeSpawned = value;
+			}
+		}
+
+		// Token: 0x17000089 RID: 137
+		// (get) Token: 0x060004C0 RID: 1216 RVA: 0x0001C50C File Offset: 0x0001A70C
+		// (set) Token: 0x060004C1 RID: 1217 RVA: 0x0001C514 File Offset: 0x0001A714
+		public float ThreadmillAddSpeed { get; set; }
+
+		// Token: 0x1700008A RID: 138
+		// (get) Token: 0x060004C2 RID: 1218 RVA: 0x0001C51D File Offset: 0x0001A71D
+		// (set) Token: 0x060004C3 RID: 1219 RVA: 0x0001C525 File Offset: 0x0001A725
+		public bool WalkedOnQuickGoal
+		{
+			get
+			{
+				return this.m_WalkedOnQuickGoal;
+			}
+			set
+			{
+				this.m_WalkedOnQuickGoal = value;
+			}
+		}
+
+		// Token: 0x1700008B RID: 139
+		// (get) Token: 0x060004C4 RID: 1220 RVA: 0x0001C52E File Offset: 0x0001A72E
+		// (set) Token: 0x060004C5 RID: 1221 RVA: 0x0001C536 File Offset: 0x0001A736
+		public float GravityAmount
+		{
+			get
+			{
+				return this.gravityAmount;
+			}
+			set
+			{
+				this.gravityAmount = value;
+			}
+		}
+
+		// Token: 0x1700008C RID: 140
+		// (get) Token: 0x060004C6 RID: 1222 RVA: 0x0001C53F File Offset: 0x0001A73F
+		// (set) Token: 0x060004C7 RID: 1223 RVA: 0x0001C547 File Offset: 0x0001A747
+		public bool CanDie
+		{
+			get
+			{
+				return this.canDie;
+			}
+			set
+			{
+				this.canDie = value;
+			}
+		}
+
+		// Token: 0x1700008D RID: 141
+		// (get) Token: 0x060004C8 RID: 1224 RVA: 0x0001C550 File Offset: 0x0001A750
+		// (set) Token: 0x060004C9 RID: 1225 RVA: 0x0001C558 File Offset: 0x0001A758
+		public bool MovePlayerAnyhow
+		{
+			get
+			{
+				return this.m_MovePlayerAnyhow;
+			}
+			set
+			{
+				this.m_MovePlayerAnyhow = value;
+			}
+		}
+
+		// Token: 0x1700008E RID: 142
+		// (get) Token: 0x060004CA RID: 1226 RVA: 0x0001C561 File Offset: 0x0001A761
+		// (set) Token: 0x060004CB RID: 1227 RVA: 0x0001C569 File Offset: 0x0001A769
+		public bool AllowInput
+		{
+			get
+			{
+				return this.allowInput;
+			}
+			set
+			{
+				this.allowInput = value;
+			}
+		}
+
+		// Token: 0x1700008F RID: 143
+		// (get) Token: 0x060004CC RID: 1228 RVA: 0x0001C572 File Offset: 0x0001A772
+		// (set) Token: 0x060004CD RID: 1229 RVA: 0x0001C57A File Offset: 0x0001A77A
+		public string MovingDirection
+		{
+			get
+			{
+				return this.m_MovingDirection;
+			}
+			set
+			{
+				this.m_MovingDirection = value;
+			}
+		}
+
+		// Token: 0x17000090 RID: 144
+		// (get) Token: 0x060004CE RID: 1230 RVA: 0x0001C583 File Offset: 0x0001A783
+		// (set) Token: 0x060004CF RID: 1231 RVA: 0x0001C58B File Offset: 0x0001A78B
+		public float Movement
+		{
+			get
+			{
+				return this.m_Movement;
+			}
+			set
+			{
+				this.m_Movement = value;
+			}
+		}
+
+		// Token: 0x17000091 RID: 145
+		// (get) Token: 0x060004D0 RID: 1232 RVA: 0x0001C594 File Offset: 0x0001A794
+		// (set) Token: 0x060004D1 RID: 1233 RVA: 0x0001C59C File Offset: 0x0001A79C
+		public Rectangle Bounding
+		{
+			get
+			{
+				return this.m_BoundingRect;
+			}
+			set
+			{
+				this.m_BoundingRect = value;
+			}
+		}
+
+		// Token: 0x17000092 RID: 146
+		// (get) Token: 0x060004D2 RID: 1234 RVA: 0x0001C5A5 File Offset: 0x0001A7A5
+		public bool isAlive
+		{
+			get
+			{
+				return this.Alive;
+			}
+		}
+
+		// Token: 0x060004D3 RID: 1235 RVA: 0x0001C5B0 File Offset: 0x0001A7B0
+		public Player(Game game, PlayerIndex playerindex, int character, byte uniqueid, bool online) : base(game)
+		{
+			this.NetworkUniqueID = uniqueid;
+			this.m_PlayerIndex = playerindex;
+			this.m_CharacterID = character;
+			if (online)
+			{
+				this.m_CharacterID = (int)uniqueid;
+			}
+			else
+			{
+				this.NetworkUniqueID = (byte)this.m_PlayerIndex;
+			}
+			this.isLocal = online;
+			this.gravityAmount = this.GravityAmountDefault;
+			this.Initialize();
+		}
+
+		// Token: 0x060004D4 RID: 1236 RVA: 0x0001C6A8 File Offset: 0x0001A8A8
+		public Player(Game game, byte uniqueid, string name) : base(game)
+		{
+			this.RemotePlayer = true;
+			this.NetworkUniqueID = uniqueid;
+			base.Name = name;
+			this.m_PlayerIndex = PlayerIndex.One;
+			this.m_CharacterID = (int)uniqueid;
+			this.Initialize();
+		}
+
+		// Token: 0x060004D5 RID: 1237 RVA: 0x0001C780 File Offset: 0x0001A980
+		public override void Initialize()
+		{
+			this.canDie = true;
+			this.m_FirstTimeSpawned = true;
+			this.m_MovePlayerAnyhow = false;
+			this.DeltaSpeed = ((GameCore)ScreenManager.Instance.Game).DeltaSpeed;
+			this.GameplayScreen = ((GameCore)ScreenManager.Instance.Game).GamePlayScreen;
+			base.Initialize();
+		}
+
+		// Token: 0x060004D6 RID: 1238 RVA: 0x0001C7DC File Offset: 0x0001A9DC
+		protected override void LoadContent()
+		{
+			this.SetAnimation();
+			this.m_State = Character.StateEnum.Idle;
+			base.LoadContent();
+			this.Reset();
+		}
+
+		// Token: 0x060004D7 RID: 1239 RVA: 0x0001C7F8 File Offset: 0x0001A9F8
+		public Rectangle SqueezeBox()
+		{
+			if (this.Crouching)
+			{
+				return new Rectangle((int)(this.m_Position.X - 2f), (int)(this.m_Position.Y + this.m_CurrentAnimation.FrameHeight * 0.25f) - 2, 4, 4);
+			}
+			return new Rectangle((int)(this.m_Position.X - 2f), (int)this.m_Position.Y - 2 - 5, 4, 4);
+		}
+
+		// Token: 0x060004D8 RID: 1240 RVA: 0x0001C870 File Offset: 0x0001AA70
+		protected override void UpdateBounding()
+		{
+			if (this.Crouching)
+			{
+				this.m_BoundingRect = new Rectangle((int)(this.m_Position.X - this.m_CurrentAnimation.FrameWidth * 0.25f), (int)(this.m_Position.Y - this.m_CurrentAnimation.FrameHeight * 0.5f) + (int)(this.m_CurrentAnimation.FrameHeight * 1f * 0.5f), (int)(this.m_CurrentAnimation.FrameWidth * 0.5f), (int)(this.m_CurrentAnimation.FrameHeight * 1f * 0.5f));
+				return;
+			}
+			this.m_BoundingRect = new Rectangle((int)(this.m_Position.X - this.m_CurrentAnimation.FrameWidth * 0.25f), (int)(this.m_Position.Y - this.m_CurrentAnimation.FrameHeight * 0.5f), (int)(this.m_CurrentAnimation.FrameWidth * 0.5f), (int)this.m_CurrentAnimation.FrameHeight);
+		}
+
+		// Token: 0x060004D9 RID: 1241 RVA: 0x0001C978 File Offset: 0x0001AB78
+		public Rectangle SmallBoundingBox()
+		{
+			if (this.SmallBounding == Rectangle.Empty)
+			{
+				if (this.Crouching)
+				{
+					this.SmallBounding = new Rectangle((int)(this.m_Position.X - this.m_CurrentAnimation.FrameWidth * 0.125f), (int)this.m_Position.Y, (int)(this.m_CurrentAnimation.FrameWidth * 0.25f), (int)(this.m_CurrentAnimation.FrameHeight * 0.5f));
+				}
+				else
+				{
+					this.SmallBounding = new Rectangle((int)(this.m_Position.X - this.m_CurrentAnimation.FrameWidth * 0.125f), (int)(this.m_Position.Y - (float)((int)(this.m_CurrentAnimation.FrameHeight * 0.5f)) + (float)((int)(this.m_CurrentAnimation.FrameHeight * 0.125f))), (int)(this.m_CurrentAnimation.FrameWidth * 0.25f), (int)(this.m_CurrentAnimation.FrameHeight * 0.75f));
+				}
+			}
+			else
+			{
+				this.SmallBounding.X = (int)(this.m_Position.X - this.m_CurrentAnimation.FrameWidth * 0.125f);
+				if (this.Crouching)
+				{
+					this.SmallBounding.Y = (int)this.m_Position.Y;
+					this.SmallBounding.Width = (int)(this.m_CurrentAnimation.FrameWidth * 0.25f);
+					this.SmallBounding.Height = (int)(this.m_CurrentAnimation.FrameHeight * 0.45f);
+				}
+				else
+				{
+					this.SmallBounding.Y = (int)(this.m_Position.Y - (float)((int)(this.m_CurrentAnimation.FrameHeight * 0.5f)) + (float)((int)(this.m_CurrentAnimation.FrameHeight * 0.125f)));
+					this.SmallBounding.Width = (int)(this.m_CurrentAnimation.FrameWidth * 0.25f);
+					this.SmallBounding.Height = (int)(this.m_CurrentAnimation.FrameHeight * 0.75f);
+				}
+			}
+			return this.SmallBounding;
+		}
+
+		// Token: 0x060004DA RID: 1242 RVA: 0x0001CB8C File Offset: 0x0001AD8C
+		public void HandleInput(InputState input)
+		{
+			float num = 0f;
+			float num2 = 0f;
+			if (!this.m_MovePlayerAnyhow)
+			{
+				this.PlayerMove = false;
+				this.Crouching = false;
+				if (this.Alive && this.Bounding.Bottom > 0)
+				{
+					bool flag = false;
+					PlayerIndex playerIndex;
+					if (input.IsKeyDown(Keys.Space, new PlayerIndex?(this.m_PlayerIndex), out playerIndex) || input.IsKeyDown(Keys.Up, new PlayerIndex?(this.m_PlayerIndex), out playerIndex) || input.IsKeyDown(Keys.Z, new PlayerIndex?(this.m_PlayerIndex), out playerIndex) || input.IsKeyDown(Keys.W, new PlayerIndex?(this.m_PlayerIndex), out playerIndex))
+					{
+						flag = true;
+					}
+					if (input.IsHoldDown(new PlayerIndex?(this.m_PlayerIndex), 0.5f) || this.ForceCrouch)
+					{
+						this.Crouching = true;
+						this.m_State = Character.StateEnum.Crawl;
+					}
+					if (input.IsButtonDown(Buttons.A, new PlayerIndex?(this.m_PlayerIndex), out playerIndex) || flag)
+					{
+						if (!this.WasPaused)
+						{
+							this.JumpNext = true;
+						}
+					}
+					else if (input.IsButtonUp(Buttons.A, new PlayerIndex?(this.m_PlayerIndex), out playerIndex) && !flag && !this.JumpBeenReleased)
+					{
+						this.JumpBeenReleased = true;
+						this.JumpFloatDistance = 0f;
+					}
+					if ((this.DashJump && input.IsButtonUp(Buttons.A, new PlayerIndex?(this.m_PlayerIndex), out playerIndex) && !flag) || !this.isAlive || this.FallingSpeed == 0f)
+					{
+						this.DashJump = false;
+					}
+					if (input.IsKeyDown(Keys.Left, new PlayerIndex?(this.m_PlayerIndex), out playerIndex) || input.IsKeyDown(Keys.A, new PlayerIndex?(this.m_PlayerIndex), out playerIndex))
+					{
+						num = 1f;
+					}
+					if (input.IsKeyDown(Keys.Right, new PlayerIndex?(this.m_PlayerIndex), out playerIndex) || input.IsKeyDown(Keys.D, new PlayerIndex?(this.m_PlayerIndex), out playerIndex))
+					{
+						num2 = 1f;
+					}
+					if (input.IsButtonDown(Buttons.DPadLeft, new PlayerIndex?(this.m_PlayerIndex), out playerIndex))
+					{
+						num = 1f;
+					}
+					if (input.IsButtonDown(Buttons.DPadRight, new PlayerIndex?(this.m_PlayerIndex), out playerIndex))
+					{
+						num2 = 1f;
+					}
+				}
+			}
+			if (this.m_WalkedOnQuickGoal)
+			{
+				string movingDirection;
+				if ((movingDirection = this.m_MovingDirection) != null)
+				{
+					if (movingDirection == "left")
+					{
+						this.moveSpeed = -7f;
+						return;
+					}
+					if (!(movingDirection == "right"))
+					{
+						if (!(movingDirection == "up") && !(movingDirection == "down"))
+						{
+							return;
+						}
+					}
+					else
+					{
+						this.moveSpeed = 7f;
+					}
+				}
+				return;
+			}
+			if (!this.Crouching)
+			{
+				if (input.GetLeftThumbStickValues(new PlayerIndex?(this.m_PlayerIndex)).X > 0f || num2 != 0f)
+				{
+					float worldRightBorder = this.GameplayScreen.WorldRightBorder;
+					if ((float)this.Bounding.Right < worldRightBorder)
+					{
+						float num3 = input.GetLeftThumbStickValues(new PlayerIndex?(this.m_PlayerIndex)).X + num2;
+						if (num3 == 0f)
+						{
+							num3 = 1f;
+						}
+						this.PlayerMove = true;
+						this.moveSpeed += this.PlayerSpeed * (num3 * 0.1f);
+					}
+				}
+				if ((input.GetLeftThumbStickValues(new PlayerIndex?(this.m_PlayerIndex)).X < 0f || num != 0f) && this.Bounding.Left > 0)
+				{
+					float num4 = Math.Abs(input.GetLeftThumbStickValues(new PlayerIndex?(this.m_PlayerIndex)).X) + num;
+					if (num4 == 0f)
+					{
+						num4 = 1f;
+					}
+					this.PlayerMove = true;
+					this.moveSpeed -= this.PlayerSpeed * (num4 * 0.1f);
+				}
+			}
+		}
+
+		// Token: 0x060004DB RID: 1243 RVA: 0x0001CF40 File Offset: 0x0001B140
+		public override void Update(GameTime gameTime)
+		{
+			if (this.JumpNext)
+			{
+				this.Jump(gameTime);
+				this.JumpNext = false;
+			}
+			if (!this.RemotePlayer)
+			{
+				if (this.Alive)
+				{
+					if (!this.GameplayScreen.CountDownTimerActive)
+					{
+						this.m_FinishTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+					}
+					this.ApplyGravity(gameTime);
+					bool forceCrouch = false;
+					List<WorldObject> collisionList = WorldHandler.Instance.Zone.CollisionList;
+					for (int i = 0; i < collisionList.Count; i++)
+					{
+						if (!(collisionList[i].ObjectType == "GoRightTrap") && !(collisionList[i].ObjectType == "GoLeftTrap") && (!(collisionList[i].ObjectType == "GoUpTrap") || ((GoUpTrap)collisionList[i]).Collided) && collisionList[i].CollisionType >= CollisionEnum.Bottom)
+						{
+							if (this.ForceCrouch || this.Crouching)
+							{
+								this.Crouching = true;
+								if (collisionList[i].Bounding.Intersects(this.SqueezeBox()))
+								{
+									if (collisionList[i].ZoneLevel == 10)
+									{
+										this.Kill(DeathReason.Squeeze);
+										break;
+									}
+									break;
+								}
+								else if (this.ForceCrouch)
+								{
+									this.Crouching = false;
+								}
+								else
+								{
+									this.Crouching = true;
+								}
+							}
+							if (collisionList[i].Bounding.Intersects(this.SmallBoundingBox()))
+							{
+								forceCrouch = true;
+							}
+						}
+					}
+					this.ForceCrouch = forceCrouch;
+					if (this.ForceCrouch)
+					{
+						this.Crouching = true;
+					}
+					if (this.ForceCrouch)
+					{
+						WorldObject worldObject = null;
+						if (this.FallingSpeed == 0f && (!this.MayWalk(this.Bounding, new Vector2(1f, 0f), out worldObject) || !this.MayWalk(this.Bounding, new Vector2(-1f, 0f), out worldObject)))
+						{
+							this.Kill(DeathReason.Squeeze);
+							this.Crouching = false;
+							this.ForceCrouch = false;
+							return;
+						}
+					}
+					if (this.KillJump)
+					{
+						this.KillJumpTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+						if (this.KillJumpTimer > 0.2f)
+						{
+							this.KillJump = false;
+						}
+					}
+					if (NetworkManager.Client != null)
+					{
+						if (((GameCore)this.m_Game).GamePlayScreen.MergedPlayerList == null)
+						{
+							goto IL_36E;
+						}
+						using (List<Player>.Enumerator enumerator = ((GameCore)this.m_Game).GamePlayScreen.MergedPlayerList.GetEnumerator())
+						{
+							while (enumerator.MoveNext())
+							{
+								Player p = enumerator.Current;
+								this.CheckPVP(p);
+							}
+							goto IL_36E;
+						}
+					}
+					if (NetworkManager.Client != null)
+					{
+						goto IL_36E;
+					}
+					using (List<Player>.Enumerator enumerator2 = ((GameCore)this.m_Game).GamePlayScreen.PlayerList.GetEnumerator())
+					{
+						while (enumerator2.MoveNext())
+						{
+							Player p2 = enumerator2.Current;
+							this.CheckPVP(p2);
+						}
+						goto IL_36E;
+					}
+				}
+				this.SpawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+				if (this.SpawnTimer > this.SpawnWait)
+				{
+					bool flag = this.Reset();
+					if (flag)
+					{
+						this.SpawnTimer = 0f;
+						if (NetworkManager.Client != null)
+						{
+							NetworkManager.Client.WriteSpawnPlayer(this.NetworkUniqueID, this.Position, (byte)this.m_State, (byte)this.m_SpriteEffect, this.FallingSpeed);
+						}
+					}
+				}
+			}
+			IL_36E:
+			if (this.TeleportObject != null && !this.Teleported && !((Teleport)this.TeleportObject).PlayerOnTeleport)
+			{
+				this.TeleportObject = null;
+			}
+			if (NetworkManager.Client != null && this.RemoteInitialized)
+			{
+				if (base.TimeToPredict)
+				{
+					this.ApplyPrediction(gameTime, this.AverageTime + (double)NetworkManager.AverageTime);
+				}
+				else
+				{
+					this.UpdateState(gameTime, gameTime.ElapsedGameTime.TotalSeconds);
+				}
+				Character.StateEnum state = this.m_State;
+				if (state != Character.StateEnum.Idle)
+				{
+					switch (state)
+					{
+					case Character.StateEnum.Crawl:
+						this.Crouching = true;
+						break;
+					}
+				}
+				this.UpdateBounding();
+			}
+			if (this.ObjectBeneath != null)
+			{
+				this.ObjectBeneathOffset = this.Position - ConvertUnits.ToDisplayUnits(this.ObjectBeneath.Position);
+			}
+			base.Update(gameTime);
+		}
+
+		// Token: 0x060004DC RID: 1244 RVA: 0x0001D3AC File Offset: 0x0001B5AC
+		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch, Matrix transform)
+		{
+			if (this.Alive && (!this.RemotePlayer || this.RemoteInitialized))
+			{
+				base.Draw(gameTime, spriteBatch, transform);
+			}
+		}
+
+		// Token: 0x060004DD RID: 1245 RVA: 0x0001D3D0 File Offset: 0x0001B5D0
+		private void Jump(GameTime gameTime)
+		{
+			this.StandingOnIce = false;
+			float fallingSpeed = this.FallingSpeed;
+			bool flag = false;
+			if (this.Teleported)
+			{
+				flag = true;
+			}
+			if (this.Trampoline)
+			{
+				if (this.FallingSpeed < 0f)
+				{
+					this.FallingSpeed = 0f;
+					this.FallingSpeed -= this.InitialJumpHeight * 8f;
+					this.Trampoline = false;
+					if (this.FallingSpeed < -12f)
+					{
+						this.FallingSpeed = -12f;
+					}
+					return;
+				}
+				flag = true;
+				this.CanJump = true;
+			}
+			if (this.KillJump)
+			{
+				if (this.JumpBeenReleased)
+				{
+					this.FallingSpeed = -this.InitialJumpHeight * 1.8f;
+					if (this.FallingSpeed < -12f)
+					{
+						this.FallingSpeed = -12f;
+					}
+					this.TriggerDashJump(true);
+					GameCore.Instance.Achievements.UnlockAchivment("ACH_SPRINGBOARD");
+					this.KillJump = false;
+				}
+				return;
+			}
+			if (this.CanJump)
+			{
+				if (this.FallingSpeed > 0f)
+				{
+					this.DashJump = true;
+				}
+				if ((this.JumpFloatDistance == Player.JumpFloatDistanceTotal && this.JumpBeenReleased) || flag)
+				{
+					if (this.DashJump || flag)
+					{
+						if (this.Trampoline)
+						{
+							this.Trampoline = false;
+							this.FallingSpeed = -this.InitialJumpHeight * this.DashJumpHeight * 2f;
+						}
+						else
+						{
+							this.FallingSpeed = -this.InitialJumpHeight * this.DashJumpHeight;
+						}
+						this.TriggerDashJump(false);
+						if (!this.JumpAchivmentTriggered && !this.RemotePlayer)
+						{
+							GameCore.Instance.Achievements.UnlockAchivment("ACH_FLY");
+							this.JumpAchivmentTriggered = true;
+						}
+					}
+					else
+					{
+						this.Jumping = true;
+						this.FallingSpeed = -this.InitialJumpHeight;
+						if (this.OnRailTile)
+						{
+							if (this.CurrentRPlatform.Velocity.Y < 0f)
+							{
+								this.FallingSpeed = -this.InitialJumpHeight + this.CurrentRPlatform.Velocity.Y * 0.75f;
+							}
+							this.CurrentRPlatform = null;
+							this.OnRailTile = false;
+						}
+						SoundManager.PlayEffect("Jump");
+					}
+					this.JumpBeenReleased = false;
+				}
+				if (this.JumpFloatDistance > 0f && !this.JumpBeenReleased && this.FallingSpeed != 0f)
+				{
+					float jumpFloatSpeed = this.JumpFloatSpeed;
+					this.FallingSpeed -= jumpFloatSpeed;
+					this.JumpFloatDistance -= jumpFloatSpeed;
+				}
+				else
+				{
+					this.CanJump = false;
+					this.JumpBeenReleased = false;
+				}
+				float num = this.FallingSpeed - fallingSpeed;
+				this.FallingSpeed = fallingSpeed;
+				this.FallingSpeed += num * (float)gameTime.ElapsedGameTime.TotalSeconds * 60f;
+			}
+		}
+
+		// Token: 0x060004DE RID: 1246 RVA: 0x0001D677 File Offset: 0x0001B877
+		public bool CheckIfLocalPlayer()
+		{
+			return !this.RemotePlayer;
+		}
+
+		// Token: 0x060004DF RID: 1247 RVA: 0x0001D684 File Offset: 0x0001B884
+		private void ApplyGravity(GameTime gameTime)
+		{
+			float fallingSpeed = this.FallingSpeed;
+			if (this.Bounding.Y > 900)
+			{
+				this.Kill(DeathReason.Fall);
+			}
+			this.UpdateBounding();
+			Rectangle boundingRect = this.m_BoundingRect;
+			boundingRect.X = (int)((float)boundingRect.X + (float)boundingRect.Width * 0.25f);
+			boundingRect.Width = (int)((float)boundingRect.Width * 0.5f);
+			float num = this.gravityAmount * (float)gameTime.ElapsedGameTime.TotalSeconds * 60f;
+			this.FallingSpeed += num;
+			if (this.FallingSpeed > 0f)
+			{
+				this.FallingSpeed *= 1.05f;
+			}
+			if (this.FallingSpeed > 9f)
+			{
+				this.FallingSpeed = 9f;
+			}
+			if (this.FallingSpeed == 0f)
+			{
+				this.InAir = false;
+				this.CanJump = true;
+			}
+			this.OldMoveSpeed = (double)this.moveSpeed;
+			this.collidie = null;
+			bool flag = this.Collision(Vector2.UnitY, out this.collidie);
+			if (flag && this.collidie.CollisionType == CollisionEnum.None)
+			{
+				flag = false;
+				this.collidie = null;
+			}
+			this.ObjectBeneath = null;
+			this.ObjectBeneathOffset = Vector2.Zero;
+			if (flag)
+			{
+				Rectangle rect = new Rectangle(this.m_BoundingRect.X, this.m_BoundingRect.Y + 1, this.m_BoundingRect.Width, this.m_BoundingRect.Height);
+				List<WorldObject> list = WorldHandler.Instance.TileIntersect(rect, 10);
+				for (int i = 0; i < list.Count; i++)
+				{
+					bool flag2 = false;
+					string objectType;
+					if ((objectType = list[i].ObjectType) != null && (objectType == "BoomTrap" || objectType == "GoUpTrap" || objectType == "GoLeftTrap" || objectType == "GoRightTrap"))
+					{
+						flag2 = true;
+					}
+					if (flag2 && list[i].Bounding.Bottom > this.Bounding.Bottom)
+					{
+						this.ObjectBeneath = list[i];
+					}
+					if (list[i].CollisionType >= CollisionEnum.Bottom && this.Bounding.Top <= list[i].Bounding.Bottom && (float)this.Bounding.Bottom - (float)this.Bounding.Height * 0.5f > (float)list[i].Bounding.Top)
+					{
+						if (this.FallingSpeed < 1f)
+						{
+							this.FallingSpeed = 1.1f;
+						}
+						if (!this.Teleported)
+						{
+							this.CanJump = false;
+						}
+					}
+					if (list[i].ObjectType == "Threadmill")
+					{
+						this.OnThreadmillTile = true;
+					}
+					if (list[i].ObjectType == "GoUpTrap")
+					{
+						bool collided = ((GoUpTrap)list[i]).Collided;
+						if ((float)this.Bounding.Bottom < (float)this.collidie.Bounding.Bottom - (float)this.collidie.Bounding.Height * 0.25f)
+						{
+							this.OnRailTile = true;
+							this.CurrentRPlatform = list[i];
+						}
+						this.OnDirectionalTrap = true;
+					}
+					if (list[i].ObjectType == "GoRightTrap")
+					{
+						if (!((GoRightTrap)list[i]).Collided)
+						{
+							this.Position += ((GoRightTrap)list[i]).Velocity;
+						}
+						else
+						{
+							this.Position -= ((GoRightTrap)list[i]).Velocity;
+						}
+					}
+					if (list[i].ObjectType == "GoLeftTrap")
+					{
+						if (!((GoLeftTrap)list[i]).Collided)
+						{
+							this.Position -= ((GoLeftTrap)list[i]).Velocity;
+						}
+						else
+						{
+							this.Position += ((GoLeftTrap)list[i]).Velocity;
+						}
+					}
+				}
+			}
+			if (flag && this.collidie != null && this.collidie.CollisionType >= CollisionEnum.Bottom && this.Bounding.Top <= this.collidie.Bounding.Bottom && (float)this.Bounding.Bottom - (float)this.Bounding.Height * 0.5f > (float)this.collidie.Bounding.Top)
+			{
+				if (this.FallingSpeed < 1f)
+				{
+					this.FallingSpeed = 1f;
+				}
+				if (!this.Teleported)
+				{
+					this.CanJump = false;
+				}
+			}
+			if (this.Crouching)
+			{
+				foreach (Player player in ((GameCore)this.m_Game).GamePlayScreen.PlayerList)
+				{
+					if (player != this && player.isAlive && player.FallingSpeed != 0f)
+					{
+						Rectangle bounding = player.Bounding;
+						Rectangle bounding2 = this.Bounding;
+						if (bounding2.Top > bounding.Top && bounding2.Top + 15 > bounding.Bottom && bounding.Intersects(bounding2) && this.FallingSpeed < 1f)
+						{
+							this.FallingSpeed = 1f;
+						}
+					}
+				}
+			}
+			if (this.collidie != null && this.collidie.ObjectType == "BoomTrap" && this.collidie.Bounding.Intersects(this.Bounding))
+			{
+				Rectangle bounding3 = this.collidie.Bounding;
+				string objectType2;
+				if ((objectType2 = this.collidie.ObjectType) != null && objectType2 == "BoomTrap" && this.Bounding.Top < this.collidie.Bounding.Top)
+				{
+					this.Position = new Vector2(this.Position.X, (float)bounding3.Top - this.m_CurrentAnimation.FrameHeight * 0.5f);
+				}
+			}
+			float num2 = this.FallingSpeed - fallingSpeed;
+			this.FallingSpeed = fallingSpeed;
+			this.FallingSpeed += num2 * (float)gameTime.ElapsedGameTime.TotalSeconds * 60f;
+			if (this.FallingSpeed > 0f)
+			{
+				if (!flag)
+				{
+					this.InAir = true;
+					this.Position += new Vector2(0f, this.FallingSpeed);
+				}
+				else
+				{
+					bool flag3 = true;
+					this.StandingOnIce = false;
+					this.OnThreadmillTile = false;
+					if (this.collidie != null && this.collidie.ObjectType != "Trap")
+					{
+						Rectangle bounding4 = this.collidie.Bounding;
+						string objectType3;
+						if ((objectType3 = this.collidie.ObjectType) != null)
+						{
+							if (objectType3 == "Trap")
+							{
+								goto IL_921;
+							}
+							if (!(objectType3 == "Ice"))
+							{
+								if (!(objectType3 == "RPlatform"))
+								{
+									if (objectType3 == "Threadmill")
+									{
+										Threadmill threadmill = (Threadmill)this.collidie;
+										this.OnThreadmillTile = true;
+										if (threadmill.Bounding.Top >= this.Bounding.Bottom)
+										{
+											this.ThreadmillSpeedAdded = true;
+											this.ThreadmillAddSpeed = threadmill.Velocity.X;
+										}
+									}
+								}
+								else if (this.CurrentRPlatform == null && (float)this.Bounding.Bottom < (float)this.collidie.Bounding.Bottom - (float)this.collidie.Bounding.Height * 0.25f)
+								{
+									RPlatform currentRPlatform = (RPlatform)this.collidie;
+									this.OnRailTile = true;
+									this.CurrentRPlatform = currentRPlatform;
+								}
+							}
+							else
+							{
+								this.StandingOnIce = true;
+							}
+						}
+						if (this.Bounding.Bottom - 10 <= bounding4.Top)
+						{
+							this.InAir = false;
+							this.Teleported = false;
+							if (!this.OnRailTile)
+							{
+								this.Position = new Vector2(this.Position.X, (float)bounding4.Top - this.m_CurrentAnimation.FrameHeight * 0.5f);
+							}
+							this.FallingSpeed = 0f;
+							this.CanJump = true;
+							this.JumpFloatDistance = Player.JumpFloatDistanceTotal;
+							this.Trampoline = false;
+							this.CanWin = true;
+							this.KillJump = false;
+							if (this.JumpAdder != (double)this.InitialJumpHeight && this.JumpBeenReleased)
+							{
+								this.JumpAdder = 0.0;
+							}
+						}
+					}
+					IL_921:
+					if (flag3)
+					{
+						this.Position += new Vector2(0f, this.FallingSpeed);
+					}
+				}
+			}
+			else
+			{
+				this.InAir = true;
+				this.Position += new Vector2(0f, this.FallingSpeed);
+			}
+			if (this.InAir)
+			{
+				this.StandingOnIce = false;
+			}
+			if (this.OnRailTile)
+			{
+				bool flag4 = false;
+				bool flag5 = false;
+				bool flag6 = false;
+				foreach (WorldObject worldObject in WorldHandler.Instance.Zone.CollisionList)
+				{
+					if (!(worldObject.ObjectType == "RPlatform") && this.CurrentRPlatform.Velocity.Y >= 0f && worldObject.Bounding.Top < this.CurrentRPlatform.Bounding.Top && worldObject.Bounding.Intersects(this.Bounding))
+					{
+						if (worldObject.Bounding.Left >= this.Bounding.Right)
+						{
+							flag5 = true;
+						}
+						if (worldObject.Bounding.Right >= this.Bounding.Left)
+						{
+							flag4 = true;
+						}
+					}
+				}
+				if (!flag6)
+				{
+					Rectangle bounding5 = this.CurrentRPlatform.Bounding;
+					bounding5.Y -= bounding5.Height - 6;
+					if (bounding5.Intersects(this.Bounding) && !this.Jumping)
+					{
+						float num3 = this.CurrentRPlatform.Velocity.X;
+						if (flag4 && num3 < 0f)
+						{
+							num3 = -num3;
+						}
+						if (flag5 && num3 > 0f)
+						{
+							num3 = -num3;
+						}
+						this.Position = new Vector2(this.Position.X + num3, ConvertUnits.ToDisplayUnits(this.CurrentRPlatform.Position.Y) - 34f);
+						this.FallingSpeed = 0f;
+						this.InAir = false;
+						this.CanJump = true;
+						this.ObjectBeneath = this.CurrentRPlatform;
+					}
+					else
+					{
+						this.OnRailTile = false;
+						this.CurrentRPlatform = null;
+					}
+				}
+			}
+			Vector2 position = this.Position;
+			if (this.ThreadmillSpeedAdded)
+			{
+				this.MoveSpeed += this.ThreadmillAddSpeed;
+			}
+			if (this.moveSpeed != 0f)
+			{
+				this.moveSpeed *= 0.45f;
+				if (this.StandingOnIce)
+				{
+					this.IceFloatingSpeed = this.moveSpeed * 2.15f;
+					this.moveSpeed = this.IceFloatingSpeed;
+				}
+				if (this.moveSpeed > 0f)
+				{
+					if (!this.ThreadmillSpeedAdded)
+					{
+						if (this.PlayerSpeedMax < this.moveSpeed)
+						{
+							this.moveSpeed = this.PlayerSpeedMax;
+						}
+					}
+					else if (this.PlayerSpeedMax * 1.5f < this.moveSpeed)
+					{
+						this.moveSpeed = this.PlayerSpeedMax * 1.5f;
+					}
+					position.X += this.moveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds * this.DeltaSpeed;
+					this.m_State = Character.StateEnum.Run;
+					base.SpriteEffect = SpriteEffects.None;
+				}
+				else
+				{
+					if (!this.ThreadmillSpeedAdded)
+					{
+						if (-this.PlayerSpeedMax > this.moveSpeed)
+						{
+							this.moveSpeed = -this.PlayerSpeedMax;
+						}
+					}
+					else if (-this.PlayerSpeedMax * 1.5f > this.moveSpeed)
+					{
+						this.moveSpeed = -(this.PlayerSpeedMax * 1.5f);
+					}
+					position.X += this.moveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds * this.DeltaSpeed;
+					this.m_State = Character.StateEnum.Run;
+					base.SpriteEffect = SpriteEffects.FlipHorizontally;
+				}
+				Rectangle boundingRect2 = this.m_BoundingRect;
+				boundingRect2.Height -= 2;
+				if (this.moveSpeed > 0f)
+				{
+					boundingRect2.X += 7;
+				}
+				else
+				{
+					boundingRect2.X += -7;
+				}
+				WorldObject worldObject2 = null;
+				if (this.MayWalk(boundingRect2, this.Position - position, out worldObject2))
+				{
+					this.Position = position;
+				}
+				if (Math.Abs(this.moveSpeed) < 0.1f)
+				{
+					this.moveSpeed = 0f;
+				}
+				if (this.OnThreadmillTile && !this.PlayerMove)
+				{
+					this.m_State = Character.StateEnum.Idle;
+				}
+				if (this.StandingOnIce && !this.Crouching && !this.PlayerMove)
+				{
+					this.m_State = Character.StateEnum.Idle;
+				}
+			}
+			else if (this.FallingSpeed == 0f && !this.Crouching)
+			{
+				this.m_State = Character.StateEnum.Idle;
+			}
+			if (this.Crouching)
+			{
+				this.m_State = Character.StateEnum.Crawl;
+			}
+			else if (this.InAir)
+			{
+				this.m_State = Character.StateEnum.Jump;
+			}
+			this.ThreadmillSpeedAdded = false;
+			this.Jumping = false;
+		}
+
+		// Token: 0x060004E0 RID: 1248 RVA: 0x0001E4B4 File Offset: 0x0001C6B4
+		public bool Collision(Vector2 dir, out WorldObject collide)
+		{
+			Vector2 vector = dir;
+			vector = new Vector2((float)Math.Floor((double)vector.X), (float)Math.Floor((double)vector.Y));
+			collide = null;
+			this.OnThreadmillTile = false;
+			if (dir.Y > 0f)
+			{
+				vector = dir;
+			}
+			Rectangle rect = new Rectangle((int)((float)this.m_BoundingRect.X + vector.X), (int)((float)this.m_BoundingRect.Y + vector.Y), this.m_BoundingRect.Width, this.m_BoundingRect.Height);
+			List<WorldObject> list = WorldHandler.Instance.TileIntersect(rect, 10);
+			bool flag = false;
+			bool flag2 = false;
+			bool flag3 = false;
+			bool flag4 = false;
+			foreach (WorldObject worldObject in list)
+			{
+				if (worldObject.ZoneLevel == 10 && !(worldObject.ObjectType == "Trap") && (this.ObjectBeneath == null || !(this.ObjectBeneath.ObjectType == "BoomTrap") || worldObject.CollisionType != CollisionEnum.Top) && worldObject.CollisionType > CollisionEnum.None)
+				{
+					CollisionEnum collisionEnum = worldObject.CollisionType;
+					if (collisionEnum - CollisionEnum.Bottom >= 0)
+					{
+						collisionEnum -= 8;
+						flag2 = true;
+					}
+					if (collisionEnum - CollisionEnum.Top >= 0)
+					{
+						collisionEnum -= 4;
+						flag = true;
+					}
+					if (collisionEnum - CollisionEnum.Right >= 0)
+					{
+						collisionEnum -= 2;
+						flag3 = true;
+					}
+					if (collisionEnum - CollisionEnum.Left >= 0)
+					{
+						collisionEnum--;
+						flag4 = true;
+					}
+					collide = worldObject;
+				}
+			}
+			return (vector.Y <= 0f || flag) && (vector.Y >= 0f || flag2) && (vector.X <= 0f || flag4) && (vector.X >= 0f || flag3);
+		}
+
+		// Token: 0x060004E1 RID: 1249 RVA: 0x0001E694 File Offset: 0x0001C894
+		public bool MayWalk(Rectangle rect, Vector2 direction, out WorldObject Collidie)
+		{
+			List<WorldObject> list = WorldHandler.Instance.TileIntersect(rect, 10);
+			bool flag = true;
+			Collidie = null;
+			foreach (WorldObject worldObject in list)
+			{
+				if (worldObject.ZoneLevel == 10 && !(worldObject.ObjectType == "Trap") && (!this.OnRailTile || !(worldObject.ObjectType == "GoUpTrap")))
+				{
+					bool flag2 = false;
+					bool flag3 = false;
+					if (worldObject.CollisionType > CollisionEnum.None)
+					{
+						CollisionEnum collisionEnum = worldObject.CollisionType;
+						if (collisionEnum - CollisionEnum.Bottom >= 0)
+						{
+							collisionEnum -= 8;
+						}
+						if (collisionEnum - CollisionEnum.Top >= 0)
+						{
+							collisionEnum -= 4;
+						}
+						if (collisionEnum - CollisionEnum.Right >= 0)
+						{
+							collisionEnum -= 2;
+							flag2 = true;
+						}
+						if (collisionEnum - CollisionEnum.Left >= 0)
+						{
+							collisionEnum--;
+							flag3 = true;
+						}
+						Collidie = worldObject;
+						string objectType;
+						if ((objectType = worldObject.ObjectType) != null)
+						{
+							if (!(objectType == "BoomTrap"))
+							{
+								if (!(objectType == "RPlatform"))
+								{
+								}
+							}
+							else
+							{
+								if (worldObject.Bounding.Top + 5 >= rect.Bottom)
+								{
+									return true;
+								}
+								return false;
+							}
+						}
+						if (direction.X > 0f && flag2 && worldObject.Bounding.Left < rect.Left)
+						{
+							return false;
+						}
+						if (direction.X < 0f && flag3 && worldObject.Bounding.Left > rect.Left)
+						{
+							return false;
+						}
+					}
+					if (!flag)
+					{
+						return flag;
+					}
+				}
+			}
+			return true;
+		}
+
+		// Token: 0x17000093 RID: 147
+		// (get) Token: 0x060004E2 RID: 1250 RVA: 0x0001E854 File Offset: 0x0001CA54
+		// (set) Token: 0x060004E3 RID: 1251 RVA: 0x0001E85C File Offset: 0x0001CA5C
+		public bool Dead { get; set; }
+
+		// Token: 0x060004E4 RID: 1252 RVA: 0x0001E868 File Offset: 0x0001CA68
+		public bool Reset()
+		{
+			this.RemotePlayerSpawned = false;
+			this.m_FinishTimer = 0f;
+			int num = 10;
+			this.m_WalkedOnQuickGoal = false;
+			this.m_MovePlayerAnyhow = false;
+			if (!this.RemotePlayer)
+			{
+				WorldObject worldObject = null;
+				if (WorldHandler.Instance.SpawnPoints.Count == 0)
+				{
+					return false;
+				}
+				if (this.GameplayScreen.GameType == GameType.Deathmatch)
+				{
+					int num2 = RandomGenerator.Instance.Next(0, WorldHandler.Instance.SpawnPoints.Count);
+					int num3 = 0;
+					foreach (WorldObject worldObject2 in WorldHandler.Instance.SpawnPoints.Values)
+					{
+						if (num3 == num2)
+						{
+							Vector2 value = ConvertUnits.ToDisplayUnits(worldObject2.Position);
+							bool flag = true;
+							if (this.GameplayScreen.PlayerList == null)
+							{
+								return false;
+							}
+							if (this.GameplayScreen.MergedPlayerList == null || this.GameplayScreen.MergedPlayerList.Count == 1)
+							{
+								worldObject = worldObject2;
+								break;
+							}
+							foreach (Player player in this.GameplayScreen.MergedPlayerList)
+							{
+								if (player.Alive && Vector2.Distance(player.Position, value) < 100f)
+								{
+									flag = false;
+								}
+							}
+							if (flag)
+							{
+								worldObject = worldObject2;
+								break;
+							}
+							break;
+						}
+						else
+						{
+							num3++;
+						}
+					}
+					if (worldObject == null)
+					{
+						this.SpawnTimer = this.SpawnWait;
+						return false;
+					}
+					goto IL_269;
+				}
+				if (WorldHandler.Instance.SpawnPoints.ContainsKey(WorldHandler.Instance.CurrentMapName + "_" + this.CustomSpawnLocation.ToString()))
+				{
+					worldObject = WorldHandler.Instance.SpawnPoints[WorldHandler.Instance.CurrentMapName + "_" + this.CustomSpawnLocation.ToString()];
+				}
+				else if (WorldHandler.Instance.SpawnPoints.ContainsKey(WorldHandler.Instance.CurrentMapName + "_1"))
+				{
+					worldObject = WorldHandler.Instance.SpawnPoints[WorldHandler.Instance.CurrentMapName + "_1"];
+				}
+				else
+				{
+					using (Dictionary<string, WorldObject>.ValueCollection.Enumerator enumerator3 = WorldHandler.Instance.SpawnPoints.Values.GetEnumerator())
+					{
+						if (enumerator3.MoveNext())
+						{
+							WorldObject worldObject3 = enumerator3.Current;
+							worldObject = worldObject3;
+						}
+					}
+				}
+				IL_269:
+				num = worldObject.ZoneLevel;
+				int num4 = 72;
+				this.m_Position = new Vector2((float)worldObject.Bounding.Center.X, (float)worldObject.Bounding.Bottom) - new Vector2(0f, (float)num4 * 0.5f) + new Vector2(0f, 2f);
+				if (!this.m_FirstTimeSpawned)
+				{
+					ParticleManager.Instance.TriggerParticle("Respawn", this.m_Position);
+				}
+				else
+				{
+					this.m_FirstTimeSpawned = false;
+				}
+			}
+			if (!this.RemotePlayer)
+			{
+				if (((GameCore)this.m_Game).GamePlayScreen != null)
+				{
+					if (((GameCore)this.m_Game).GamePlayScreen.Online)
+					{
+						base.Layer = (double)num + (double)this.NetworkUniqueID * -1E-06;
+					}
+					else
+					{
+						base.Layer = (double)num + (double)this.m_PlayerIndex * -0.001;
+					}
+				}
+			}
+			else
+			{
+				base.Layer = (double)num + (double)this.NetworkUniqueID * -1E-06 - 0.004;
+			}
+			base.Layer += 0.949999988079071;
+			base.Layer = Math.Round(base.Layer, 6);
+			DrawHelper.Instance.SortDrawList();
+			this.Trampoline = false;
+			this.m_ZoneLevel = num;
+			this.Crouching = false;
+			this.FallingSpeed = 5f;
+			this.Jumping = false;
+			this.CanJump = true;
+			this.JumpFloatDistance = Player.JumpFloatDistanceTotal;
+			this.allowInput = true;
+			this.Alive = true;
+			this.CanWin = false;
+			this.canDie = true;
+			this.gravityAmount = this.GravityAmountDefault;
+			this.UpdateBounding();
+			return true;
+		}
+
+		// Token: 0x17000094 RID: 148
+		// (get) Token: 0x060004E5 RID: 1253 RVA: 0x0001ECC0 File Offset: 0x0001CEC0
+		// (set) Token: 0x060004E6 RID: 1254 RVA: 0x0001ECC8 File Offset: 0x0001CEC8
+		public bool InvertDirection { get; set; }
+
+		// Token: 0x17000095 RID: 149
+		// (get) Token: 0x060004E7 RID: 1255 RVA: 0x0001ECD1 File Offset: 0x0001CED1
+		// (set) Token: 0x060004E8 RID: 1256 RVA: 0x0001ECD9 File Offset: 0x0001CED9
+		public double OldMoveSpeed { get; set; }
+
+		// Token: 0x17000096 RID: 150
+		// (get) Token: 0x060004E9 RID: 1257 RVA: 0x0001ECE2 File Offset: 0x0001CEE2
+		// (set) Token: 0x060004EA RID: 1258 RVA: 0x0001ECEA File Offset: 0x0001CEEA
+		public bool InAir { get; set; }
+
+		// Token: 0x060004EB RID: 1259 RVA: 0x0001ECF4 File Offset: 0x0001CEF4
+		public void Kill(DeathReason reason)
+		{
+			if (this.canDie)
+			{
+				if (this.Alive)
+				{
+					if (reason != DeathReason.Lava && reason != DeathReason.Fireball)
+					{
+						WeatherManager.Instance.GoreManager.KillSplatter(this.Position);
+					}
+					this.Deaths += 1f;
+					this.RemotePlayerSpawned = false;
+					switch (reason)
+					{
+					case DeathReason.Trap:
+						SoundManager.PlayEffect("TrapDeath");
+						goto IL_D9;
+					case DeathReason.Sawblade:
+						SoundManager.PlayEffect("SawbladeDeath");
+						goto IL_D9;
+					case DeathReason.Lava:
+						SoundManager.PlayEffect("LavaDeath");
+						goto IL_D9;
+					case DeathReason.LaserDoor:
+						SoundManager.PlayEffect("LaserDeath");
+						goto IL_D9;
+					case DeathReason.Fireball:
+						SoundManager.PlayEffect("LavaDeath");
+						goto IL_D9;
+					case DeathReason.LaserCannon:
+						SoundManager.PlayEffect("LaserDeath");
+						goto IL_D9;
+					}
+					SoundManager.PlayEffect("Death");
+					IL_D9:
+					if (!this.RemotePlayer)
+					{
+						GameplayScreen gamePlayScreen = ((GameCore)ScreenManager.Instance.Game).GamePlayScreen;
+						string map = string.Empty;
+						if (gamePlayScreen.GameType == GameType.Adventure)
+						{
+							char c = Convert.ToChar(gamePlayScreen.CurrentWorld, Tools.NumberFormatInfo());
+							map = c + "_" + gamePlayScreen.CurrentLevel;
+						}
+						else if (gamePlayScreen.GameType == GameType.Deathmatch)
+						{
+							map = "dm_" + gamePlayScreen.CurrentLevel;
+						}
+						else if (gamePlayScreen.GameType == GameType.Race)
+						{
+							map = gamePlayScreen.CurrentWorld + "_" + gamePlayScreen.CurrentLevel;
+						}
+						if (reason != DeathReason.PVP && reason != DeathReason.One && reason != DeathReason.Two && reason != DeathReason.Three && reason != DeathReason.Four)
+						{
+							UserFeedback.SaveDeathToXML(this.Position, reason.ToString(), map);
+							StatsManager.AddDeath(this.PlayerIndex, reason);
+						}
+						if (NetworkManager.Client != null)
+						{
+							NetworkManager.Client.WriteKillPlayer(this.NetworkUniqueID, reason);
+						}
+					}
+					if (NetworkManager.Server != null)
+					{
+						switch (reason)
+						{
+						case DeathReason.One:
+							OnlineStatsManager.AddKill(0, this.NetworkUniqueID, true);
+							break;
+						case DeathReason.Two:
+							OnlineStatsManager.AddKill(1, this.NetworkUniqueID, true);
+							break;
+						case DeathReason.Three:
+							OnlineStatsManager.AddKill(2, this.NetworkUniqueID, true);
+							break;
+						case DeathReason.Four:
+							OnlineStatsManager.AddKill(3, this.NetworkUniqueID, true);
+							break;
+						default:
+							if (reason != DeathReason.PVP)
+							{
+								OnlineStatsManager.AddDeath(this.NetworkUniqueID, reason);
+							}
+							break;
+						}
+					}
+				}
+				this.m_FinishTimer = 0f;
+				this.Alive = false;
+			}
+		}
+
+		// Token: 0x17000097 RID: 151
+		// (get) Token: 0x060004EC RID: 1260 RVA: 0x0001EF5A File Offset: 0x0001D15A
+		// (set) Token: 0x060004ED RID: 1261 RVA: 0x0001EF62 File Offset: 0x0001D162
+		public bool SpawnShield { get; set; }
+
+		// Token: 0x060004EE RID: 1262 RVA: 0x0001EF6B File Offset: 0x0001D16B
+		public void SetNetworkUniqueID(byte id)
+		{
+			this.NetworkUniqueID = id;
+			this.m_CharacterID = (int)id;
+			this.SetAnimation();
+			this.Reset();
+		}
+
+		// Token: 0x060004EF RID: 1263 RVA: 0x0001EF88 File Offset: 0x0001D188
+		private void SetAnimation()
+		{
+			switch (this.m_CharacterID)
+			{
+			case 0:
+				this.m_AnimationCollection = AnimationManager.GetAnimationCollection("Red");
+				break;
+			case 1:
+				this.m_AnimationCollection = AnimationManager.GetAnimationCollection("Green");
+				break;
+			case 2:
+				this.m_AnimationCollection = AnimationManager.GetAnimationCollection("Blue");
+				break;
+			case 3:
+				this.m_AnimationCollection = AnimationManager.GetAnimationCollection("Pink");
+				break;
+			default:
+				this.m_AnimationCollection = AnimationManager.GetAnimationCollection("Red");
+				break;
+			}
+			if (this.m_AnimationCollection.Count > 0)
+			{
+				foreach (Character.StateEnum key in this.m_AnimationCollection.Keys)
+				{
+					foreach (Animation animation in this.m_AnimationCollection[key])
+					{
+						animation.Origin = new Vector2(animation.FrameWidth * 0.5f, animation.FrameHeight * 0.5f);
+					}
+				}
+			}
+		}
+
+		// Token: 0x060004F0 RID: 1264 RVA: 0x0001F0C8 File Offset: 0x0001D2C8
+		private void CheckPVP(Player p)
+		{
+			if (p == this)
+			{
+				return;
+			}
+			if (!p.Alive)
+			{
+				return;
+			}
+			if (this.FallingSpeed > 0f)
+			{
+				Rectangle bounding = this.Bounding;
+				bounding.Height += 5;
+				if (bounding.Bottom < p.Bounding.Top + 15 && bounding.Intersects(p.Bounding))
+				{
+					if (!p.Crouching || this.GameplayScreen.GameType == GameType.Deathmatch)
+					{
+						if (NetworkManager.Client != null)
+						{
+							DeathReason reason = DeathReason.One;
+							if (this.NetworkUniqueID == 1)
+							{
+								reason = DeathReason.Two;
+							}
+							else if (this.NetworkUniqueID == 2)
+							{
+								reason = DeathReason.Three;
+							}
+							else if (this.NetworkUniqueID == 3)
+							{
+								reason = DeathReason.Four;
+							}
+							if (p.RemotePlayer)
+							{
+								p.RemoteInitialized = false;
+								p.ResetPrediction();
+								p.Kill(reason);
+								NetworkManager.Client.WriteKillPlayer(p.NetworkUniqueID, reason);
+							}
+							else
+							{
+								p.Kill(reason);
+							}
+						}
+						else if (NetworkManager.Client == null)
+						{
+							DeathReason reason2 = (DeathReason)Enum.Parse(typeof(DeathReason), this.PlayerIndex.ToString(), true);
+							p.Kill(reason2);
+							StatsManager.AddKill(this.PlayerIndex, p.PlayerIndex);
+						}
+						this.KillJump = true;
+						this.KillJumpTimer = 0f;
+					}
+					if (!this.RemotePlayer)
+					{
+						this.FallingSpeed = -this.InitialJumpHeight * 1.3f;
+					}
+				}
+			}
+		}
+
+		// Token: 0x060004F1 RID: 1265 RVA: 0x0001F22C File Offset: 0x0001D42C
+		public override void ApplyPrediction(GameTime gameTime, double averagetime)
+		{
+			base.TimeToPredict = false;
+			if (base.PreviousPosition == Vector2.Zero)
+			{
+				base.PreviousPosition = this.Position;
+			}
+			if (base.SimulationPosition == Vector2.Zero)
+			{
+				base.SimulationPosition = this.Position;
+			}
+			base.PreviousVelocity = base.SimulatedVelocity;
+			base.SimulatedVelocity = base.SimulationPosition - this.Position;
+			base.SimulationPosition += base.SimulatedVelocity;
+			base.SimulationPosition += base.SimulatedVelocity / 4f * (float)averagetime;
+			this.UpdateState(gameTime, averagetime);
+		}
+
+		// Token: 0x060004F2 RID: 1266 RVA: 0x0001F2E8 File Offset: 0x0001D4E8
+		public override void UpdateState(GameTime gametime, double time)
+		{
+			if (base.SimulationPosition == Vector2.Zero)
+			{
+				base.SimulationPosition = this.Position;
+			}
+			base.PreviousPosition = this.Position;
+			if (base.SimulatedVelocity == Vector2.Zero)
+			{
+				this.Position = base.SimulationPosition;
+			}
+			else
+			{
+				float num = Vector2.Distance(base.SimulationPosition, this.Position);
+				float amount = MathHelper.Clamp(num * 0.02f, 0.1f, 0.3f);
+				this.Position = Vector2.Lerp(this.Position, base.SimulationPosition, amount);
+			}
+			if (this.ObjectBeneath != null)
+			{
+				string objectType;
+				if ((objectType = this.ObjectBeneath.ObjectType) != null)
+				{
+					if (objectType == "BoomTrap")
+					{
+						this.m_Position.Y = (float)((BoomTrap)this.ObjectBeneath).GetTop();
+						goto IL_1A9;
+					}
+					if (objectType == "RPlatform")
+					{
+						this.m_Position.Y = (float)((RPlatform)this.ObjectBeneath).GetTop();
+						goto IL_1A9;
+					}
+					if (objectType == "GoUpTrap")
+					{
+						this.m_Position.Y = (float)((GoUpTrap)this.ObjectBeneath).GetTop();
+						goto IL_1A9;
+					}
+					if (objectType == "GoLeftTrap")
+					{
+						this.m_Position.Y = (float)((GoLeftTrap)this.ObjectBeneath).GetTop();
+						goto IL_1A9;
+					}
+					if (objectType == "GoRightTrap")
+					{
+						this.m_Position.Y = (float)((GoRightTrap)this.ObjectBeneath).GetTop();
+						goto IL_1A9;
+					}
+				}
+				this.m_Position.Y = (float)this.ObjectBeneath.Bounding.Top;
+				IL_1A9:
+				this.m_Position.X = ConvertUnits.ToDisplayUnits(this.ObjectBeneath.Position).X + this.ObjectBeneathOffset.X;
+			}
+		}
+
+		// Token: 0x060004F3 RID: 1267 RVA: 0x0001F4CC File Offset: 0x0001D6CC
+		public void TriggerDashJump(bool killjump)
+		{
+			ParticleManager.Instance.TriggerParticle("Dashjump", new Vector2((float)this.Bounding.Center.X, (float)this.Bounding.Bottom));
+			if (killjump)
+			{
+				SoundManager.PlayEffect("KillJump");
+			}
+			else
+			{
+				SoundManager.PlayEffect("DashJump");
+			}
+			if (NetworkManager.Client != null && !this.RemotePlayer)
+			{
+				NetworkManager.Client.WritePlayerDashJump(this, killjump);
+			}
+		}
+
+		// Token: 0x040008F9 RID: 2297
+		private const int JumpImpulse = 6;
+
+		// Token: 0x040008FA RID: 2298
+		private const float BaseSpeed = 5.2f;
+
+		// Token: 0x040008FB RID: 2299
+		private const float MinSpeed = 3f;
+
+		// Token: 0x040008FC RID: 2300
+		private const float MaxSpeed = 12f;
+
+		// Token: 0x040008FD RID: 2301
+		private int m_CharacterID;
+
+		// Token: 0x040008FE RID: 2302
+		private float SpawnTimer;
+
+		// Token: 0x040008FF RID: 2303
+		private float SpawnWait = 1f;
+
+		// Token: 0x04000900 RID: 2304
+		private bool ThreadmillSpeedAdded;
+
+		// Token: 0x04000901 RID: 2305
+		public int portalPortalCount;
+
+		// Token: 0x04000902 RID: 2306
+		public TimeSpan portalPortalTime;
+
+		// Token: 0x04000903 RID: 2307
+		public bool JumpAchivmentTriggered;
+
+		// Token: 0x04000904 RID: 2308
+		public GameplayScreen GameplayScreen;
+
+		// Token: 0x04000905 RID: 2309
+		private Vector2 MoveStart = Vector2.Zero;
+
+		// Token: 0x04000906 RID: 2310
+		private Vector2 MoveEnd = Vector2.Zero;
+
+		// Token: 0x04000907 RID: 2311
+		private Vector2 direction = Vector2.Zero;
+
+		// Token: 0x04000908 RID: 2312
+		private WorldObject collidie;
+
+		// Token: 0x04000909 RID: 2313
+		public bool MayJump = true;
+
+		// Token: 0x0400090A RID: 2314
+		public bool Jumping;
+
+		// Token: 0x0400090B RID: 2315
+		private PlayerIndex m_PlayerIndex;
+
+		// Token: 0x0400090C RID: 2316
+		private int m_ZoneLevel;
+
+		// Token: 0x0400090D RID: 2317
+		public WorldObject ObjectBeneath;
+
+		// Token: 0x0400090E RID: 2318
+		public Vector2 ObjectBeneathOffset;
+
+		// Token: 0x0400090F RID: 2319
+		private bool PlayerMove;
+
+		// Token: 0x04000910 RID: 2320
+		private bool allowInput;
+
+		// Token: 0x04000911 RID: 2321
+		public bool RemotePlayerSpawned;
+
+		// Token: 0x04000912 RID: 2322
+		public long ConnectionIdentifier;
+
+		// Token: 0x04000913 RID: 2323
+		private float DeltaSpeed;
+
+		// Token: 0x04000914 RID: 2324
+		private WorldObject CurrentRPlatform;
+
+		// Token: 0x04000915 RID: 2325
+		private WorldObject CurrentDirectionalTrap;
+
+		// Token: 0x04000916 RID: 2326
+		private bool OnDirectionalTrap;
+
+		// Token: 0x04000917 RID: 2327
+		public bool Teleported;
+
+		// Token: 0x04000918 RID: 2328
+		public float rTeleportTimer;
+
+		// Token: 0x04000919 RID: 2329
+		public bool Crouching;
+
+		// Token: 0x0400091A RID: 2330
+		public bool Alive;
+
+		// Token: 0x0400091B RID: 2331
+		private bool JumpBeenReleased = true;
+
+		// Token: 0x0400091C RID: 2332
+		private double JumpAdder;
+
+		// Token: 0x0400091D RID: 2333
+		public bool CanJump;
+
+		// Token: 0x0400091E RID: 2334
+		public bool CanWin;
+
+		// Token: 0x0400091F RID: 2335
+		private bool WasPaused;
+
+		// Token: 0x04000920 RID: 2336
+		public float FallingSpeed;
+
+		// Token: 0x04000921 RID: 2337
+		public float InitialJumpHeight = 7.4f;
+
+		// Token: 0x04000922 RID: 2338
+		public bool DashJump;
+
+		// Token: 0x04000923 RID: 2339
+		private float moveSpeed;
+
+		// Token: 0x04000924 RID: 2340
+		private float IceFloatingSpeed;
+
+		// Token: 0x04000925 RID: 2341
+		public float Kills;
+
+		// Token: 0x04000926 RID: 2342
+		public float Deaths;
+
+		// Token: 0x04000927 RID: 2343
+		public float Wins;
+
+		// Token: 0x04000928 RID: 2344
+		public float m_FinishTimer;
+
+		// Token: 0x04000929 RID: 2345
+		private bool m_FirstTimeSpawned;
+
+		// Token: 0x0400092A RID: 2346
+		private float PlayerSpeed = 50f;
+
+		// Token: 0x0400092B RID: 2347
+		private float GravityAmountDefault = 0.66f;
+
+		// Token: 0x0400092C RID: 2348
+		private float gravityAmount;
+
+		// Token: 0x0400092D RID: 2349
+		private bool OnRailTile;
+
+		// Token: 0x0400092E RID: 2350
+		private bool OnThreadmillTile;
+
+		// Token: 0x0400092F RID: 2351
+		private float PlayerSpeedMax = 3.4f;
+
+		// Token: 0x04000930 RID: 2352
+		public bool Trampoline;
+
+		// Token: 0x04000931 RID: 2353
+		public bool KillJump;
+
+		// Token: 0x04000932 RID: 2354
+		private float DashJumpHeight = 0.72f;
+
+		// Token: 0x04000933 RID: 2355
+		public float KillJumpTimer;
+
+		// Token: 0x04000934 RID: 2356
+		private float JumpFloatSpeed = 0.7f;
+
+		// Token: 0x04000935 RID: 2357
+		private static float JumpFloatDistanceTotal = 6f;
+
+		// Token: 0x04000936 RID: 2358
+		private float JumpFloatDistance = Player.JumpFloatDistanceTotal;
+
+		// Token: 0x04000937 RID: 2359
+		private float FallingVel;
+
+		// Token: 0x04000938 RID: 2360
+		private bool JumpNext;
+
+		// Token: 0x04000939 RID: 2361
+		private bool StandingOnIce;
+
+		// Token: 0x0400093A RID: 2362
+		private bool m_WalkedOnQuickGoal;
+
+		// Token: 0x0400093B RID: 2363
+		public int CustomSpawnLocation = 1;
+
+		// Token: 0x0400093C RID: 2364
+		private bool canDie;
+
+		// Token: 0x0400093D RID: 2365
+		private bool m_MovePlayerAnyhow;
+
+		// Token: 0x0400093E RID: 2366
+		private float m_Movement;
+
+		// Token: 0x0400093F RID: 2367
+		private string m_MovingDirection;
+
+		// Token: 0x04000940 RID: 2368
+		private Rectangle SmallBounding = Rectangle.Empty;
+
+		// Token: 0x04000941 RID: 2369
+		public WorldObject TeleportObject;
+
+		// Token: 0x04000942 RID: 2370
+		public bool isLocal;
+
+		// Token: 0x04000943 RID: 2371
+		private bool ForceCrouch;
+	}
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--Revision 1.3-->
+<Main Palette="False" SaveOptions="Gzip" Offset="0 0 1536 864">
+  <Zone Name="0_0">
+    <W TN="Object_World5" N="Object_World5" PX="1008" PY="240" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="d-42" />
+    <W TN="Object_World5" N="Object_World5" PX="384" PY="240" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="d-2" />
+    <W TN="Object_World5" N="Object_World5" PX="576" PY="240" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="d-3" />
+    <W TN="Object_World5" N="Object_World5" PX="480" PY="432" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="d-6" />
+    <W TN="Object_World5" N="Object_World5" PX="480" PY="48" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="d-7" />
+    <W TN="Object_World5" N="Object_World5" PX="768" PY="240" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="d-4" />
+    <W TN="Object_World5" N="Object_World5" PX="768" PY="432" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="d-5" />
+    <W TN="Object_World5" N="Object_World5" PX="192" PY="240" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="d-1" />
+    <W TN="Object_World5" N="Object_World5" PX="1008" PY="432" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="d-43" />
+    <W TN="Object_World5" N="Object_World5" PX="1248" PY="48" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="d-9" />
+    <W TN="Object_World5" N="Object_World5" PX="1248" PY="240" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="d-10" />
+    <W TN="Object_World5" N="Object_World5" PX="1248" PY="432" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="d-44" />
+    <W TN="Object_World5" N="Object_World5" PX="864" PY="48" S="1" R="0" L="4" OT="LevelInformation" CT="None" ZL="10" F="50" M="False" D="d-8" />
+  </Zone>
+</Main>
